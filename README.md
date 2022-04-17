@@ -1,10 +1,10 @@
 # data-mining-term-project
 CIS 600 - social media and data mining term project
 
-* Arpit Shekhar Raj 
+* Arpit Shekhar Raj (araj01@syr.edu)
 * Peter Valentine (pjvalent@syr.edu)
-* Shubhangi Jaiswal 
-* Vidheesh Kumar Nacode 
+* Shubhangi Jaiswal (sjaisw02@syr.edu)
+* Vidheesh Kumar Nacode (vnacode@syr.edu)
 
 
 
