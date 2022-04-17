@@ -25,3 +25,6 @@ Technical Tasks
 |Fake News Detection| | |
 | Visualization and Results | Data Visualization to demonstrate results with charts, plots and word clouds. | |
 
+Branching proposal
+----- 
+![alt text](https://github.com/pjvalent/data-mining-term-project/blob/main/branching%20proposal.JPG "Logo Title Text 1")
