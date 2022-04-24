@@ -28,3 +28,8 @@ Technical Tasks
 Branching proposal
 ----- 
 ![alt text](https://github.com/pjvalent/data-mining-term-project/blob/main/branching%20proposal.JPG "Logo Title Text 1")
+
+Cited Work
+-----
+Used the following tool to pull historical tweets:
+https://github.com/JustAnotherArchivist/snscrape
