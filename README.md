@@ -6,7 +6,11 @@ CIS 600 - social media and data mining term project
 * Shubhangi Jaiswal (sjaisw02@syr.edu)
 * Vidheesh Kumar Nacode (vnacode@syr.edu)
 
+Setup for running 
+-----
+Unzip the tweets in the twitter directory once you clone the repo, and make sure you set the correct directory paths in the model.py file
 NEED THIS FILE FOR TRAINNIG: https://www.kaggle.com/datasets/bertcarremans/glovetwitter27b100dtxt?resource=download
+
 
 This is the repository for CIS 600 Social media and Data Mining spring 2022 at Syracuse University
 
