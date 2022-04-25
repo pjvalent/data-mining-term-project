@@ -20,8 +20,8 @@ Information is more available to the average person today than ever in history. 
 
 Technical Tasks
 -----
-| Task          | Description   | Dates | Status|
-| ------------- |---------------|:-----:|
+| Task          | Description   | Dates | Status |
+| ------------- |---------------|:-----:| -------|
 |Harvesting Data| Collection of Tweets using Twitter API to create a dataset. | 04/03/2022 - 04/06/2022| Done (preliminary) |
 | Exploratory Data Analysis | Investigate data to discover patterns and form hypothesis. | | |
 | Model Implementation | Analyse intent of the cleaned tweets and classifying them using Machine Learning | | Done |
