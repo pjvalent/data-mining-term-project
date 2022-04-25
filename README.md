@@ -6,7 +6,7 @@ CIS 600 - social media and data mining term project
 * Shubhangi Jaiswal (sjaisw02@syr.edu)
 * Vidheesh Kumar Nacode (vnacode@syr.edu)
 
-
+NEED THIS FILE FOR TRAINNIG: https://www.kaggle.com/datasets/bertcarremans/glovetwitter27b100dtxt?resource=download
 
 This is the repository for CIS 600 Social media and Data Mining spring 2022 at Syracuse University
 
