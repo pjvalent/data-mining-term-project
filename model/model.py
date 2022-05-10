@@ -75,8 +75,10 @@ if __name__ == "__main__":
     #set the path for the fake news and real news paths
     real_news = "../fake_news_data/data/True.csv"
     fake_news = "../fake_news_data/data/Fake.csv"
+    #setting the path for the embedding file
     embedding_file = "../archive/glove.twitter.27B.100d.txt"
 
+    #reading real news and fake news into new variables
     real, fake = read_data(real_news, fake_news)
 
     # checking for null values in data
@@ -87,18 +89,27 @@ if __name__ == "__main__":
     real['category'] = 1
     fake['category'] = 0
 
+    #creating a pandas dataframe for the data
     df = pd.concat([real,fake])
+    #concatenate the text and title
     df["text"] = df["text"] + " " + df["title"]
+    #remove extra columns
     del df["title"]
     del df["subject"]
     del df["date"]
+    #visualize the dataframe
     print(df.head())
 
+    #denoise the text
     df['text']=df['text'].apply(denoise_text)
 
+    #split the data into 4 categories, two training sets and two testing sets
     x_train,x_test,y_train,y_test = train_test_split(df.text,df.category,random_state = 0)
+    #visualize the testing data y set
     print(y_test)
 
+    #tokenization of the data
+    #this breaks the data down into its constituant parts for analysis
     tokenizer = text.Tokenizer(num_words=10000)
     tokenizer.fit_on_texts(x_train)
     tokenized_train = tokenizer.texts_to_sequences(x_train)
@@ -106,7 +117,7 @@ if __name__ == "__main__":
 
     tokenized_test = tokenizer.texts_to_sequences(x_test)
     X_test = sequence.pad_sequences(tokenized_test, maxlen=300)
-
+    #creating embeddings from the embedding file
     embeddings_index = dict(get_coefs(*o.rstrip().rsplit(' ')) for o in open(embedding_file))
 
     all_embs = np.stack(embeddings_index.values())
@@ -143,13 +154,11 @@ if __name__ == "__main__":
     print("Accuracy on Testing Data is - " , model.evaluate(X_test,y_test)[1]*100 , "%")
 
 
-
-
     pred = model.predict(X_test)
     pred[:5]    
 
     print(pred[:10]) #need to convert these with a function to map the value to either 0 or 1
-
+    #mapping a determination function to the output
     pred_int = list(map(lambda x: 0 if x < 0.5 else 1, pred))
 
     print(pred_int[:10])
