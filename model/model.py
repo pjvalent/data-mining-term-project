@@ -35,18 +35,7 @@ def read_data(real_news, fake_news):
 def get_coefs(word, *arr): 
     return word, np.asarray(arr, dtype='float32')
 
-# def model(embed_size, batch_size, epochs):
-#     #Defining Neural Network
-#     model = Sequential()
-#     #Non-trainable embeddidng layer
-#     model.add(Embedding(10000, output_dim=embed_size, weights=[embedding_matrix], input_length=300, trainable=False))
-#     #LSTM 
-#     model.add(LSTM(units=128 , return_sequences = True , recurrent_dropout = 0.25 , dropout = 0.25))
-#     model.add(LSTM(units=64 , recurrent_dropout = 0.1 , dropout = 0.1))
-#     model.add(Dense(units = 32 , activation = 'relu'))
-#     model.add(Dense(1, activation='sigmoid'))
-#     model.compile(optimizer=keras.optimizers.Adam(lr = 0.01), loss='binary_crossentropy', metrics=['accuracy'])
-#     print(model.summary())
+
 def strip_html(text):
     soup = BeautifulSoup(text, "html.parser")
     return soup.get_text()
@@ -105,8 +94,6 @@ if __name__ == "__main__":
     del df["date"]
     print(df.head())
 
-
-
     df['text']=df['text'].apply(denoise_text)
 
     x_train,x_test,y_train,y_test = train_test_split(df.text,df.category,random_state = 0)
@@ -115,7 +102,7 @@ if __name__ == "__main__":
     tokenizer = text.Tokenizer(num_words=10000)
     tokenizer.fit_on_texts(x_train)
     tokenized_train = tokenizer.texts_to_sequences(x_train)
-    x_train = sequence.pad_sequences(tokenized_train, maxlen=300) #need to do this with our twitter data to predict classifications
+    x_train = sequence.pad_sequences(tokenized_train, maxlen=300)
 
     tokenized_test = tokenizer.texts_to_sequences(x_test)
     X_test = sequence.pad_sequences(tokenized_test, maxlen=300)
@@ -128,7 +115,6 @@ if __name__ == "__main__":
 
     word_index = tokenizer.word_index
     nb_words = min(10000, len(word_index))
-    #change below line if computing normal stats is too slow
     embedding_matrix = embedding_matrix = np.random.normal(emb_mean, emb_std, (nb_words, embed_size))
     for word, i in word_index.items():
         if i >= 10000: continue
@@ -142,9 +128,9 @@ if __name__ == "__main__":
     learning_rate_reduction = ReduceLROnPlateau(monitor='val_accuracy', patience = 2, verbose=1,factor=0.5, min_lr=0.00001)
 
     model = Sequential()
-    #Non-trainable embeddidng layer
+   
     model.add(Embedding(10000, output_dim=embed_size, weights=[embedding_matrix], input_length=300, trainable=False))
-    #LSTM 
+    
     model.add(LSTM(units=128 , return_sequences = True , recurrent_dropout = 0.25 , dropout = 0.25))
     model.add(LSTM(units=64 , recurrent_dropout = 0.1 , dropout = 0.1))
     model.add(Dense(units = 32 , activation = 'relu'))
@@ -153,8 +139,8 @@ if __name__ == "__main__":
     print(model.summary())
 
     history = model.fit(x_train, y_train, batch_size = batch_size , validation_data = (X_test,y_test) , epochs = epochs , callbacks = [learning_rate_reduction])
-    print("Accuracy of the model on Training Data is - " , model.evaluate(x_train,y_train)[1]*100 , "%")
-    print("Accuracy of the model on Testing Data is - " , model.evaluate(X_test,y_test)[1]*100 , "%")
+    print("Accuracy on Training Data is - " , model.evaluate(x_train,y_train)[1]*100 , "%")
+    print("Accuracy on Testing Data is - " , model.evaluate(X_test,y_test)[1]*100 , "%")
 
 
 
